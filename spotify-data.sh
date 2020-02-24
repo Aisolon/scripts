@@ -1,19 +1,19 @@
 #!/bin/bash
 
-#echo  \"$(playerctl metadata title)\" by $(playerctl metadata artist)
+# echo  \"$(playerctl metadata title)\" by $(playerctl metadata artist)
 
 # Based on https://aur.archlinux.org/packages/playerctl/
 
-#INSTANCE="${BLOCK_INSTANCE}"
+# INSTANCE="${BLOCK_INSTANCE}"
 
-#if [[ "${INSTANCE}" != "" ]]; then
+# if [[ "${INSTANCE}" != "" ]]; then
 #  ARGUMENTS="--player ${INSTANCE}"
-#fi
+# fi
 
-ICON_PLAY=""
-ICON_PAUSE=""
-ICON_STOP=""
-CUR_ICON=""
+PLAY=""
+PAUSE=""
+STOP=""
+ICON=""
 
 #if [[ "${BLOCK_BUTTON}" -eq 1 ]]; then
 #    $(playerctl ${ARGUMENTS} previous)
@@ -23,20 +23,20 @@ CUR_ICON=""
 #    $(playerctl ${ARGUMENTS} next)
 #fi
 
-PLAYER_STATUS=$(playerctl status)
-INFO_TITLE=$(playerctl metadata title)
-INFO_ALBUM=$(playerctl metadata album)
-INFO_ARTIST=$(playerctl metadata artist)
+STATUS=$(playerctl status)
+TITLE=$(playerctl metadata title)
+ALBUM=$(playerctl metadata album)
+ARTIST=$(playerctl metadata artist)
 
-if [[ "${PLAYER_STATUS}" = "Paused" ]]; then
-  CUR_ICON="${ICON_PAUSE}"
-elif [[ "${PLAYER_STATUS}" = "Playing" ]]; then
-  CUR_ICON="${ICON_PLAY}"
+if [[ "${STATUS}" = "Paused" ]]; then
+  ICON="${PAUSE}"
+elif [[ "${STATUS}" = "Playing" ]]; then
+  ICON="${PLAY}"
 else
-  CUR_ICON="${ICON_STOP}"
+  ICON="${STOP}"
 fi
 
-if [[ "${INFO_TITLE}" != "" ]] && [[ "${INFO_ARTIST}" != "" ]]; then
-  echo "${CUR_ICON} ${INFO_ARTIST} - ${INFO_TITLE}"
-  echo "${CUR_ICON} ${INFO_ARTIST} - ${INFO_TITLE}"
+if [[ "${TITLE}" != "" ]] && [[ "${ARTIST}" != "" ]]; then
+  echo "${ICON} ${ARTIST} - ${TITLE}"
+  echo "${ICON} ${ARTIST} - ${TITLE}"
 fi
